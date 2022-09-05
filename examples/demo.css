@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  padding: 32px;
+}
+.container h1 {
+  color:cadetblue;
+  margin-bottom: 32px;
+}
+.container ul {
+  padding-left: 48px;
+}
+
+.container ul li {
+  margin-bottom: 16px;
+}
+
+.container ul a{
+  color:dodgerblue;
+  text-decoration: none;
+}
+
+.container ul a:hover {
+  color:blueviolet;
+}

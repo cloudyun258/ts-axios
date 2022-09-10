@@ -2,13 +2,16 @@
   margin: 0;
   padding: 0;
 }
+
 .container {
   padding: 32px;
 }
+
 .container h1 {
   color:cadetblue;
   margin-bottom: 32px;
 }
+
 .container ul {
   padding-left: 48px;
 }

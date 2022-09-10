@@ -13,6 +13,7 @@ router.get('/test', (ctx, next) => {
   }
 })
 
+
 /**
  * 第五章
  */
@@ -98,7 +99,6 @@ router.put('/c7-put', (ctx, next) => {
   }
 })
 
-
 router.patch('/c7-patch', (ctx, next) => {
   ctx.body = {
     code: 0,
@@ -106,7 +106,6 @@ router.patch('/c7-patch', (ctx, next) => {
     data: ctx.request.body
   }
 })
-
 
 router.get('/c7-get', (ctx, next) => {
   ctx.body = {
@@ -150,5 +149,8 @@ router.get('/interceptor-get', (ctx, next) => {
     data: 'Hello'
   }
 })
+
+
+
 
 module.exports = router

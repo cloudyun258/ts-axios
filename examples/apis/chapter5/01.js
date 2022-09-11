@@ -18,12 +18,11 @@ axios({
   }
 })
 
-const date = new Date()
 axios({
   method: 'get',
   url: '/c5-get',
   params: {
-    date
+    date: new Date()
   }
 })
 

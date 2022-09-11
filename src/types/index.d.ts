@@ -2,6 +2,10 @@
  * 全局类型定义
  */
 
+export interface AnyObject {
+  [key: string]: any
+}
+
 export type Method = 'get' | 'GET'
   | 'post' | 'POST'
   | 'put' | 'PUT'
@@ -13,6 +17,6 @@ export type Method = 'get' | 'GET'
 export interface AxiosRequestConfig {
   url: string
   method: Method
-  params: any
-  data: any
+  params?: AnyObject
+  data?: any
 }

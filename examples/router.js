@@ -32,6 +32,7 @@ router.post('/c5-post', (ctx, next) => {
     data: ctx.request.body
   }
 })
+
 router.post('/c5-post-buffer', (ctx, next) => {
   const msg = []
   ctx.req.on('data', chunk => {
@@ -41,7 +42,7 @@ router.post('/c5-post-buffer', (ctx, next) => {
   })
   ctx.req.on('end', () => {
     const buf = Buffer.concat(msg)
-    console.log('接收到的buffer数据：', buf.toJSON())
+    console.log('接收到的 buffer 数据：', buf.toJSON())
   })
   ctx.body = {
     code: 0,

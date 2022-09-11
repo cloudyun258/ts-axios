@@ -26,6 +26,7 @@ export interface AxiosRequestConfig {
     但更多的情况是不会指定该属性，那么就需要手动调用 JSON.parse() 处理下
   */
   responseType?: XMLHttpRequestResponseType
+  timeout: number
 }
 
 export interface AxiosResponse {
@@ -34,7 +35,15 @@ export interface AxiosResponse {
   statusText: string // http 状态文本
   headers: AnyObject
   config: AxiosRequestConfig
-  request: XMLHttpRequest
+  request: XMLHttpRequest,
 }
 
 export type AxiosPromise = Promise<AxiosResponse>
+
+export interface AxiosError extends Error {
+  isAxiosError: boolean
+  config: AxiosRequestConfig
+  code?: string | null
+  request?: XMLHttpRequest
+  response?: AxiosResponse
+}

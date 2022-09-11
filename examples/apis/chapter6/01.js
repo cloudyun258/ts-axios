@@ -20,7 +20,7 @@ axios({
   console.log(e)
 })
 
-// 模拟网络问题
+// 网络错误
 setTimeout(() => {
   axios({
     method: 'get',

@@ -10,3 +10,14 @@ export function transformReqData(data: any): any {
   }
   return data
 }
+
+export function transformResData(data: any): any {
+  if (typeof data === 'string') {
+    try {
+      data = JSON.parse(data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  return data
+}

@@ -3,18 +3,22 @@
  */
 
 import { buildURL } from './helpers/url'
-import { transformReqData } from './helpers/data'
-import { AxiosRequestConfig } from './types'
+import { transformReqData, transformResData } from './helpers/data'
+import { processReqHeaders } from './helpers/headers'
+import { AnyObject, AxiosPromise, AxiosRequestConfig, AxiosResponse } from './types'
 import xhr from './xhr'
 
-function axios(config: AxiosRequestConfig): void {
+function axios(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config)
-  xhr(config)
+  return xhr(config).then(res => {
+    return transformResponseData(res)
+  })
 }
 
 // 处理请求参数
 function processConfig(config: AxiosRequestConfig): void {
   config.url = transformURL(config)
+  config.headers = transformRequestHeader(config)
   config.data = transformRequestData(config)
 }
 
@@ -26,6 +30,16 @@ function transformURL(config: AxiosRequestConfig): string {
 function transformRequestData(config: AxiosRequestConfig): any {
   const { data } = config
   return transformReqData(data)
+}
+
+function transformResponseData(res: AxiosResponse): AxiosResponse {
+  res.data = transformResData(res.data)
+  return res
+}
+
+function transformRequestHeader(config: AxiosRequestConfig): AnyObject {
+  const { headers = {}, data } = config
+  return processReqHeaders(headers, data)
 }
 
 export default axios

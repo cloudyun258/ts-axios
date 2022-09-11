@@ -33,21 +33,23 @@ router.post('/c5-post', (ctx, next) => {
   }
 })
 
-router.post('/c5-post-buffer', (ctx, next) => {
-  const msg = []
-  ctx.req.on('data', chunk => {
-    if (chunk) {
-      msg.push(chunk)
-    }
-  })
-  ctx.req.on('end', () => {
-    const buf = Buffer.concat(msg)
-    console.log('接收到的 buffer 数据：', buf.toJSON())
+router.post('/c5-post-buffer', async (ctx, next) => {
+  const data = await new Promise((resolve, reject) => {
+    const msg = []
+    ctx.req.on('data', chunk => {
+      if (chunk) {
+        msg.push(chunk)
+      }
+    })
+    ctx.req.on('end', () => {
+      const buf = Buffer.concat(msg).toJSON()
+      resolve(buf)
+    })
   })
   ctx.body = {
     code: 0,
     msg: '请求成功',
-    data: ctx.request.body
+    data
   }
 })
 

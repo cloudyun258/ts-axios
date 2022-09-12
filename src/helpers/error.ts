@@ -29,7 +29,7 @@ class AxiosError extends Error {
   }
 }
 
-// 为了方便使用，我们对外暴露了一个 createError 的工厂方法
+// 为了方便使用，我们对外暴露一个 createError 工厂方法
 export function createError(
   message: string,
   config: AxiosRequestConfig,

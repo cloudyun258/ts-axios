@@ -2,9 +2,9 @@
  * 发送请求
  */
 
-import { parseResHeaders } from './helpers/headers'
-import { createError } from './helpers/error'
-import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from './types'
+import { parseResHeaders } from '../helpers/headers'
+import { createError } from '../helpers/error'
+import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from '../types'
 
 function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -28,7 +28,7 @@ function xhr(config: AxiosRequestConfig): AxiosPromise {
       request.timeout = timeout
     }
 
-    request.open(method.toLocaleUpperCase(), url, true)
+    request.open(method.toLocaleUpperCase(), url!, true)
 
     // 设置请求头
     Object.keys(headers!).forEach(name => {
@@ -71,7 +71,7 @@ function xhr(config: AxiosRequestConfig): AxiosPromise {
 
       const responseHeaders = parseResHeaders(request.getAllResponseHeaders())
       const responseData = responseType && responseType === 'text' ? request.responseText : request.response
-      const response : AxiosResponse = {
+      const response: AxiosResponse = {
         data: responseData,
         status: request.status,
         statusText: request.statusText,

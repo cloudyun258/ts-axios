@@ -8,6 +8,13 @@ axios({
   }
 })
 
+axios('/c7-post', {
+  method: 'post',
+  data: {
+    msg: 'hi 222222'
+  }
+})
+
 axios.request({
   url: '/c7-post',
   method: 'post',

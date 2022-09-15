@@ -6,13 +6,21 @@ export interface AnyObject {
   [key: string]: any
 }
 
-export type Method = 'get' | 'GET'
-  | 'post' | 'POST'
-  | 'put' | 'PUT'
-  | 'patch' | 'PATCH'
-  | 'delete' | 'DELETE'
-  | 'head' | 'HEAD'
-  | 'options' | 'OPTIONS'
+export type Method =
+  | 'get'
+  | 'GET'
+  | 'post'
+  | 'POST'
+  | 'put'
+  | 'PUT'
+  | 'patch'
+  | 'PATCH'
+  | 'delete'
+  | 'DELETE'
+  | 'head'
+  | 'HEAD'
+  | 'options'
+  | 'OPTIONS'
 
 export interface AxiosRequestConfig {
   url?: string
@@ -52,6 +60,11 @@ export interface AxiosError extends Error {
 
 // Axios类的实例对象
 export interface Axios {
+  interceptors: {
+    request: InterceptorManager
+    response: InterceptorManager
+  }
+
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>
 
   get<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
@@ -68,4 +81,18 @@ export interface Axios {
 export interface AxiosInstance extends Axios {
   <T = any>(config: AxiosRequestConfig): AxiosPromise<T>
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
+}
+
+// 拦截器管理类的实例对象
+export interface InterceptorManager<T = any> {
+  use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number
+  eject(id: number): void
+}
+
+export interface ResolvedFn<T = any> {
+  (val: T): T | Promise<T>
+}
+
+export interface RejectedFn {
+  (error: any): any
 }

@@ -2,8 +2,8 @@
  * 处理请求头和响应头
  */
 
-import { AnyObject } from '../types'
-import { isPureObject } from './utils'
+import { AnyObject, Method } from '../types'
+import { deepMerge, isPureObject } from './utils'
 
 /**
  * @description 规范化请求头名字
@@ -48,4 +48,15 @@ export function parseResHeaders(headers: string): AnyObject {
   })
 
   return res
+}
+
+// 扁平化请求头对象
+export function flattenHeaders(headers: AnyObject, method: Method): AnyObject {
+  headers = deepMerge(headers.common, headers[method], headers)
+  const methodsToDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common']
+  methodsToDelete.forEach(method => {
+    delete headers[method]
+  })
+
+  return headers
 }

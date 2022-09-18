@@ -154,6 +154,16 @@ router.get('/interceptor-get', (ctx, next) => {
 })
 
 
+/**
+ * 第九章
+ */
+router.post('/mergeConfig', (ctx, next) => {
+  ctx.body = {
+    code: 0,
+    msg: '请求成功',
+    data: ctx.request.query
+  }
+})
 
 
 module.exports = router

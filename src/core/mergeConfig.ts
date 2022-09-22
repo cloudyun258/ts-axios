@@ -42,7 +42,7 @@ function mergeConfig(
     customConfig = {}
   }
 
-  const config = Object.create(null)
+  const config = Object.create(Object.prototype)
 
   for (const key in customConfig) {
     if (customConfig.hasOwnProperty(key)) {

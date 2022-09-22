@@ -55,3 +55,36 @@ axios({
 }).then(res => {
   console.log(res.data)
 })
+
+
+const instance = axios.create({
+  timeout: 10000,
+  transformRequest: [
+    (data, headers) => {
+      data.feature = '扩展 axios.create 静态方法'
+      headers.phone = '5180342'
+      return data
+    },
+    ...axios.defaults.transformRequest
+  ],
+  transformResponse: [
+    ...axios.defaults.transformResponse,
+    (data) => {
+      if (typeof data === 'object') {
+        data.data.number = '10010'
+        data.data.b = 2222
+      }
+      return data
+    }
+  ]
+})
+
+instance({
+  url: '/mergeConfig',
+  method: 'post',
+  data: {
+    a: 1
+  }
+}).then(res => {
+  console.log(res.data)
+})

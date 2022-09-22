@@ -88,6 +88,10 @@ export interface AxiosInstance extends Axios {
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
 }
 
+export interface AxiosStatic extends AxiosInstance {
+  create(config?: AxiosRequestConfig): AxiosInstance
+}
+
 // 拦截器管理类的实例对象
 export interface InterceptorManager<T = any> {
   use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number

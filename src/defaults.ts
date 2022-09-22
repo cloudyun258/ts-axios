@@ -2,7 +2,9 @@
  * 请求默认配置
  */
 
-import { AxiosRequestConfig } from './types'
+import { processReqHeaders } from './helpers/headers'
+import { transformReqData, transformResData } from './helpers/data'
+import { AnyObject, AxiosRequestConfig } from './types'
 
 const defaults: AxiosRequestConfig = {
   method: 'get',
@@ -11,7 +13,18 @@ const defaults: AxiosRequestConfig = {
     common: {
       Accept: 'application/json, text/plain, */*'
     }
-  }
+  },
+  transformRequest: [
+    function(data: any, headers?: AnyObject): any {
+      processReqHeaders(headers!, data)
+      return transformReqData(data)
+    }
+  ],
+  transformResponse: [
+    function(data: any): any {
+      return transformResData(data)
+    }
+  ]
 }
 
 const methodNoData = ['get', 'delete', 'head', 'options']

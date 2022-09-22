@@ -26,3 +26,32 @@ axios({
 }).then(res => {
   console.log(res.data)
 })
+
+
+axios({
+  url: '/mergeConfig',
+  method: 'post',
+  data: {
+    a: 1
+  },
+  transformRequest: [
+    (data, headers) => {
+      data.feature = '请求和响应配置化'
+      headers.phone = '5180222'
+      return data
+    },
+    ...axios.defaults.transformRequest
+  ],
+  transformResponse: [
+    ...axios.defaults.transformResponse,
+    (data) => {
+      if (typeof data === 'object') {
+        data.data.number = '10086'
+        data.data.b = 2
+      }
+      return data
+    }
+  ]
+}).then(res => {
+  console.log(res.data)
+})

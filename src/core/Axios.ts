@@ -4,7 +4,7 @@
 
 import { AxiosRequestConfig, AxiosResponse, Method, RejectedFn, ResolvedFn } from '../types'
 import dispatchRequest from './dispatchRequest'
-import InterceptorManager from './interceptorManagerClass'
+import InterceptorManager from './InterceptorManager'
 import mergeConfig from './mergeConfig'
 
 interface Interceptors {

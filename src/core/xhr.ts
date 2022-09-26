@@ -14,7 +14,8 @@ function xhr(config: AxiosRequestConfig): AxiosPromise {
       data = null,
       headers,
       responseType,
-      timeout
+      timeout,
+      cancelToken
     } = config
 
     const request = new XMLHttpRequest()
@@ -26,6 +27,13 @@ function xhr(config: AxiosRequestConfig): AxiosPromise {
     // 默认值是 0，即永不超时
     if (timeout) {
       request.timeout = timeout
+    }
+
+    if (cancelToken) {
+      cancelToken.promise.then(reason => {
+        request.abort()
+        reject(reason)
+      })
     }
 
     request.open(method.toLocaleUpperCase(), url!, true)

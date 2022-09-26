@@ -1,11 +1,11 @@
 const Router = require('@koa/router')
 const router = new Router()
 
-router.get('/', (ctx, next) => {
+router.get('/', ctx => {
   ctx.redirect('/pages/demo.html')
 })
 
-router.get('/test', (ctx, next) => {
+router.get('/test', ctx => {
   ctx.body = {
     code: 0,
     msg: '请求成功',
@@ -17,7 +17,7 @@ router.get('/test', (ctx, next) => {
 /**
  * 第五章
  */
-router.get('/c5-get', (ctx, next) => {
+router.get('/c5-get', ctx => {
   ctx.body = {
     code: 0,
     msg: '请求成功',
@@ -25,7 +25,7 @@ router.get('/c5-get', (ctx, next) => {
   }
 })
 
-router.post('/c5-post', (ctx, next) => {
+router.post('/c5-post', ctx => {
   ctx.body = {
     code: 0,
     msg: '请求成功',
@@ -33,8 +33,8 @@ router.post('/c5-post', (ctx, next) => {
   }
 })
 
-router.post('/c5-post-buffer', async (ctx, next) => {
-  const data = await new Promise((resolve, reject) => {
+router.post('/c5-post-buffer', async ctx => {
+  const data = await new Promise(resolve => {
     const msg = []
     ctx.req.on('data', chunk => {
       if (chunk) {
@@ -57,7 +57,7 @@ router.post('/c5-post-buffer', async (ctx, next) => {
 /**
  * 第六章
  */
-router.get('/c6-error', (ctx, next) => {
+router.get('/c6-error', ctx => {
   if (Math.random() > 0.7) {
     ctx.body = {
       code: 0,
@@ -69,8 +69,8 @@ router.get('/c6-error', (ctx, next) => {
   }
 })
 
-router.get('/c6-timeout', async (ctx, next) => {
-  await new Promise((resolve, reject) => {
+router.get('/c6-timeout', async ctx => {
+  await new Promise(resolve => {
     setTimeout(() => {
       resolve()
     }, 3000)
@@ -86,7 +86,7 @@ router.get('/c6-timeout', async (ctx, next) => {
 /**
  * 第七章
  */
- router.post('/c7-post', (ctx, next) => {
+ router.post('/c7-post', ctx => {
   ctx.body = {
     code: 0,
     msg: '请求成功',
@@ -94,7 +94,7 @@ router.get('/c6-timeout', async (ctx, next) => {
   }
 })
 
-router.put('/c7-put', (ctx, next) => {
+router.put('/c7-put', ctx => {
   ctx.body = {
     code: 0,
     msg: '请求成功',
@@ -102,7 +102,7 @@ router.put('/c7-put', (ctx, next) => {
   }
 })
 
-router.patch('/c7-patch', (ctx, next) => {
+router.patch('/c7-patch', ctx => {
   ctx.body = {
     code: 0,
     msg: '请求成功',
@@ -110,7 +110,7 @@ router.patch('/c7-patch', (ctx, next) => {
   }
 })
 
-router.get('/c7-get', (ctx, next) => {
+router.get('/c7-get', ctx => {
   ctx.body = {
     code: 0,
     msg: '请求成功',
@@ -118,7 +118,7 @@ router.get('/c7-get', (ctx, next) => {
   }
 })
 
-router.delete('/c7-delete', (ctx, next) => {
+router.delete('/c7-delete', ctx => {
   ctx.body = {
     code: 0,
     msg: '请求成功',
@@ -126,14 +126,14 @@ router.delete('/c7-delete', (ctx, next) => {
   }
 })
 
-router.head('/c7-head', (ctx, next) => {
+router.head('/c7-head', ctx => {
   ctx.body = {
     code: 0,
     msg: '请求成功'
   }
 })
 
-router.options('/c7-options', (ctx, next) => {
+router.options('/c7-options', ctx => {
   ctx.body = {
     code: 0,
     msg: '请求成功',
@@ -145,7 +145,7 @@ router.options('/c7-options', (ctx, next) => {
 /**
  * 第八章
  */
-router.get('/interceptor-get', (ctx, next) => {
+router.get('/interceptor-get', ctx => {
   ctx.body = {
     code: 0,
     msg: '请求成功',
@@ -157,7 +157,24 @@ router.get('/interceptor-get', (ctx, next) => {
 /**
  * 第九章
  */
-router.post('/mergeConfig', (ctx, next) => {
+router.post('/mergeConfig', ctx => {
+  ctx.body = {
+    code: 0,
+    msg: '请求成功',
+    data: ctx.request.body
+  }
+})
+
+
+/**
+ * 第十章
+ */
+router.get('/cancel', async ctx => {
+  await new Promise(resolve => {
+    setTimeout(() => {
+      resolve()
+    }, 3000)
+  })
   ctx.body = {
     code: 0,
     msg: '请求成功',

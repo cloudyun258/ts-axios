@@ -173,12 +173,12 @@ router.get('/cancel', async ctx => {
   await new Promise(resolve => {
     setTimeout(() => {
       resolve()
-    }, 3000)
+    }, 1500)
   })
   ctx.body = {
     code: 0,
     msg: '请求成功',
-    data: ctx.request.body
+    data: ctx.request.query
   }
 })
 

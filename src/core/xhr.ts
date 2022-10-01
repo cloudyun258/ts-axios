@@ -15,7 +15,8 @@ function xhr(config: AxiosRequestConfig): AxiosPromise {
       headers,
       responseType,
       timeout,
-      cancelToken
+      cancelToken,
+      withCredentials
     } = config
 
     const request = new XMLHttpRequest()
@@ -34,6 +35,10 @@ function xhr(config: AxiosRequestConfig): AxiosPromise {
         request.abort()
         reject(reason)
       })
+    }
+
+    if (withCredentials) {
+      request.withCredentials = true
     }
 
     request.open(method.toLocaleUpperCase(), url!, true)

@@ -183,4 +183,21 @@ router.get('/cancel', async ctx => {
 })
 
 
+/**
+ * 第十一章
+ */
+ router.post('/more/cookies', ctx => {
+  ctx.body = {
+    code: 0,
+    msg: '请求成功',
+    data: {
+      name: ctx.cookies.get('name'),
+      age: ctx.cookies.get('age'),
+      postData: ctx.request.body
+    }
+  }
+})
+
+
+
 module.exports = router

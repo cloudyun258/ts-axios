@@ -39,6 +39,8 @@ export interface AxiosRequestConfig {
   transformResponse?: AxiosTransformer | AxiosTransformer[]
   cancelToken?: CancelToken
 
+  withCredentials?: boolean // 允许跨域携带 Cookie
+
   [propName: string]: any
 }
 

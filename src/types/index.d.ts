@@ -42,6 +42,8 @@ export interface AxiosRequestConfig {
   withCredentials?: boolean // 允许跨域携带 Cookie
   csrfCookieName?: string
   csrfHeaderName?: string
+  onDownloadProgress?: (e: ProgressEvent) => void
+  onUploadProgress?: (e: ProgressEvent) => void
 
   [propName: string]: any
 }

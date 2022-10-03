@@ -20,6 +20,10 @@ export function isDate(val: any): val is Date {
   return toString.call(val) === '[object Date]'
 }
 
+export function isFormData(val: any): val is FormData {
+  return toString.call(val) === '[object FormData]'
+}
+
 export function extend<T, U>(source: T, target: U): T & U {
   // 原型属性也要复制，所以不需要调用 hasOwnProperty()
   for (const key in target) {

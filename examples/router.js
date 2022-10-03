@@ -37,6 +37,7 @@ router.post('/c5-post-buffer', async ctx => {
   const data = await new Promise(resolve => {
     const msg = []
     ctx.req.on('data', chunk => {
+      console.log(chunk)
       if (chunk) {
         msg.push(chunk)
       }

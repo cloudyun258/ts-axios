@@ -8,3 +8,7 @@ axios.post('/more/cookies', { str: 'bodyData' }, {
 }).then(res => {
   console.log('cookies: ', res.data)
 })
+
+axios.post('/more/csrf', { str: 'CSRF测试' }).then(res => {
+  console.log('cookies: ', res.data)
+})

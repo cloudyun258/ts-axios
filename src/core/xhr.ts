@@ -5,6 +5,8 @@
 import { parseResHeaders } from '../helpers/headers'
 import { createError } from '../helpers/error'
 import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from '../types'
+import { isURLSameOrigin } from '../helpers/url'
+import cookie from '../helpers/cookie'
 
 function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -16,7 +18,9 @@ function xhr(config: AxiosRequestConfig): AxiosPromise {
       responseType,
       timeout,
       cancelToken,
-      withCredentials
+      withCredentials,
+      csrfCookieName,
+      csrfHeaderName
     } = config
 
     const request = new XMLHttpRequest()
@@ -42,6 +46,13 @@ function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
 
     request.open(method.toLocaleUpperCase(), url!, true)
+
+    if ((withCredentials || isURLSameOrigin(url!)) && csrfCookieName) {
+      const csrfValue = cookie.getItem(csrfCookieName!)
+      if (csrfValue && csrfHeaderName) {
+        headers![csrfHeaderName] = csrfValue
+      }
+    }
 
     // 设置请求头
     Object.keys(headers!).forEach(name => {

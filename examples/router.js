@@ -198,6 +198,15 @@ router.get('/cancel', async ctx => {
   }
 })
 
+router.post('/more/csrf', ctx => {
+  // 往浏览器设置 cookie
+  ctx.cookies.set('CSRF-TOKEN-D', '123456abc')
+  ctx.body = {
+    code: 0,
+    msg: '请求成功',
+    data: ctx.request.body
+  }
+})
 
 
 module.exports = router

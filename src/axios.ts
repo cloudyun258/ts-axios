@@ -2,7 +2,7 @@
  * 构建并导出 axios 混合对象
  */
 
-import { AxiosStatic, AxiosRequestConfig, AxiosClassStatic } from './types'
+import { AxiosStatic, AxiosRequestConfig } from './types'
 import Axios from './core/Axios'
 import { extend } from './helpers/utils'
 import defaults from './defaults'

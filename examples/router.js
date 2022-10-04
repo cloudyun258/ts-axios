@@ -227,5 +227,9 @@ router.post('/more/http-auth', ctx => {
   }
 })
 
+router.get('/more/code', ctx => {
+  ctx.status = 304
+})
+
 
 module.exports = router

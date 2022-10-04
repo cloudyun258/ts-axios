@@ -26,7 +26,10 @@ const defaults: AxiosRequestConfig = {
     function(data: any): any {
       return transformResData(data)
     }
-  ]
+  ],
+  validateStatus(status: number): boolean {
+    return status >= 200 && status < 300
+  }
 }
 
 const methodNoData = ['get', 'delete', 'head', 'options']

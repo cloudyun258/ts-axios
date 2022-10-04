@@ -25,3 +25,21 @@ axios.post('/more/http-auth', {
 }).catch(err => {
   console.log('401 未授权', err)
 })
+
+
+
+axios.get('/more/code').then(res => {
+  console.log('304 走 then', res)
+}).catch(err => {
+  console.log('304 走 catch', err)
+})
+
+axios.get('/more/code', {
+  validateStatus(status) {
+    return status >= 200 && status < 400
+  }
+}).then(res => {
+  console.log('304 走 then', res)
+}).catch(err => {
+  console.log('304 走 catch', err)
+})

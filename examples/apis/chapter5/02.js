@@ -19,7 +19,7 @@ axios({
 axios({
   method: 'post',
   url: '/c5-post',
-  data: new URLSearchParams('?q=searchParams&topic=混合咖啡') // 支持传入 URLSearchParams 对象
+  data: new URLSearchParams('q=searchParams&topic=混合咖啡') // 支持传入 URLSearchParams 对象
 })
 
 axios({

@@ -231,5 +231,13 @@ router.get('/more/code', ctx => {
   ctx.status = 304
 })
 
+router.get('/more/params', ctx => {
+  ctx.body = {
+    code: 0,
+    msg: '请求成功',
+    data: ctx.request.query
+  }
+})
+
 
 module.exports = router

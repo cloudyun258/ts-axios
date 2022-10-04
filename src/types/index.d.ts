@@ -42,11 +42,15 @@ export interface AxiosRequestConfig {
   withCredentials?: boolean // 允许跨域携带 Cookie
   csrfCookieName?: string
   csrfHeaderName?: string
+
   onDownloadProgress?: (e: ProgressEvent) => void
   onUploadProgress?: (e: ProgressEvent) => void
+
   auth?: AxiosBasicCredentials // http授权
   validateStatus?: (status: number) => boolean
   paramsSerializer?: (params: AnyObject) => string
+
+  baseURL?: string
 
   [propName: string]: any
 }

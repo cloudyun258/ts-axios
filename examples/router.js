@@ -1,3 +1,5 @@
+const { Base64 } = require('js-base64')
+
 const Router = require('@koa/router')
 const router = new Router()
 
@@ -206,6 +208,22 @@ router.post('/more/csrf', ctx => {
     code: 0,
     msg: '请求成功',
     data: ctx.request.body
+  }
+})
+
+router.post('/more/http-auth', ctx => {
+  const auth = ctx.request.headers.authorization
+  const [type, credentials] = auth.split(' ')
+  // 原生解析 base64 字符串方式：Buffer.from(credentials, 'base64').toString()
+  const [username, password] = Base64.atob(credentials).split(':')
+  if (type === 'Basic' && username === 'zhang-san' && password === '123456') {
+      ctx.body = {
+      code: 0,
+      msg: '请求成功',
+      data: ctx.request.body
+    }
+  } else {
+    ctx.status = 401
   }
 })
 

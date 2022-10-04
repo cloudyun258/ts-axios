@@ -23,7 +23,8 @@ function xhr(config: AxiosRequestConfig): AxiosPromise {
       csrfCookieName,
       csrfHeaderName,
       onDownloadProgress,
-      onUploadProgress
+      onUploadProgress,
+      auth
     } = config
 
     const request = new XMLHttpRequest()
@@ -116,6 +117,11 @@ function xhr(config: AxiosRequestConfig): AxiosPromise {
         if (csrfValue && csrfHeaderName) {
           headers![csrfHeaderName] = csrfValue
         }
+      }
+
+      if (auth) {
+        const base64Source = window.btoa(`${auth.username}:${auth.password}`)
+        headers!['Authorization'] = `Basic ${base64Source}`
       }
 
       // 设置请求头

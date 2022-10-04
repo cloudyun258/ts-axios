@@ -12,7 +12,7 @@ export function isObject(val: any): boolean {
   return val !== null && typeof val === 'object'
 }
 
-export function isPureObject(val: any): boolean {
+export function isPureObject(val: any): val is Object {
   return toString.call(val) === '[object Object]'
 }
 
@@ -34,13 +34,13 @@ export function extend<T, U>(source: T, target: U): T & U {
 
 // 对象深拷贝
 export function deepMerge(...objs: any[]): any {
-  const result = Object.create(null)
+  const result = Object.create(Object.prototype)
 
   objs.forEach(obj => {
-    Object.keys(obj).forEach(key => {
+    Object.keys(obj || {}).forEach(key => {
       const val = obj[key]
       if (isPureObject(val)) {
-        // result身上已有该属性
+        // result 身上已有该属性
         if (isPureObject(result[key])) {
           result[key] = deepMerge(result[key], val)
         } else {

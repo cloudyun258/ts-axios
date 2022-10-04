@@ -5,7 +5,7 @@
 import { AnyObject, AxiosRequestConfig } from '../types'
 import { deepMerge } from '../helpers/utils'
 
-const strats = Object.create(null)
+const strats = Object.create(Object.prototype)
 
 // 默认合并策略 ['method', 'timeout', ...]
 function defaultStrat(val1: any, val2: any): any {
@@ -19,12 +19,9 @@ function fromVal2Strat(val1: any, val2: any): any {
 }
 
 // 复杂对象合并
-const stratKeysDeepMerge = ['headers']
-function deepMergeStrat(val1: AnyObject, val2: AnyObject | undefined): AnyObject {
-  if (!val2) {
-    return deepMerge(val1)
-  }
-  return deepMerge(val1, val2)
+const stratKeysDeepMerge = ['headers', 'auth']
+function deepMergeStrat(val1: AnyObject | undefined, val2: AnyObject | undefined): AnyObject {
+  return deepMerge(val1 || {}, val2 || {})
 }
 
 stratKeysFromVal2.forEach(key => {
@@ -63,5 +60,6 @@ function mergeConfig(
 
   return config
 }
+
 
 export default mergeConfig

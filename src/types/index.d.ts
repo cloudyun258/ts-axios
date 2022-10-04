@@ -84,6 +84,8 @@ export interface Axios {
     response: InterceptorManager
   }
 
+  getUri(config?: AxiosRequestConfig): string
+
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>
 
   get<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
@@ -102,12 +104,21 @@ export interface AxiosInstance extends Axios {
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
 }
 
+export interface AxiosClassStatic {
+  new(config: AxiosRequestConfig): Axios
+}
+
 export interface AxiosStatic extends AxiosInstance {
   create(config?: AxiosRequestConfig): AxiosInstance
 
   CancelToken: CancelTokenStatic
   Cancel: CancelStatic
   isCancel: (val: any) => boolean
+
+  all<T>(promises: Array<T | Promise<T>>): Promise<T[]>
+  spread<T, R>(callback: (...args: T[]) => R): (arr: T[]) => R
+
+  Axios: any
 }
 
 // 拦截器管理类的实例对象

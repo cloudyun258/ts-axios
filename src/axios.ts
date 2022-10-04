@@ -2,7 +2,7 @@
  * 构建并导出 axios 混合对象
  */
 
-import { AxiosStatic, AxiosRequestConfig } from './types'
+import { AxiosStatic, AxiosRequestConfig, AxiosClassStatic } from './types'
 import Axios from './core/Axios'
 import { extend } from './helpers/utils'
 import defaults from './defaults'
@@ -27,5 +27,17 @@ axios.create = (config?: AxiosRequestConfig) => {
 axios.CancelToken = CancelToken
 axios.Cancel = Cancel
 axios.isCancel = isCancel
+
+axios.all = (promises) => {
+  return Promise.all(promises)
+}
+
+axios.spread = (callback) => {
+  return (arr) => {
+    return callback.apply(null, arr)
+  }
+}
+
+axios.Axios = Axios
 
 export default axios

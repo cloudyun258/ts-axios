@@ -1,5 +1,6 @@
 /**
  * 全局类型定义
+ * 因 .d.ts 文件不会被打包到文件中，但为了让业务侧能使用该类型文件，所以改成 .ts 文件（打包后会变成 .d.ts 文件）
  */
 
 export interface AnyObject {
@@ -105,7 +106,7 @@ export interface AxiosInstance extends Axios {
 }
 
 export interface AxiosClassStatic {
-  new(config: AxiosRequestConfig): Axios
+  new (config: AxiosRequestConfig): Axios
 }
 
 export interface AxiosStatic extends AxiosInstance {
@@ -163,7 +164,7 @@ export interface CancelTokenSource {
 }
 
 export interface CancelTokenStatic {
-  new(executor: CancelExecutor): CancelToken
+  new (executor: CancelExecutor): CancelToken
   source(): CancelTokenSource
 }
 
@@ -172,7 +173,7 @@ export interface Cancel {
 }
 
 export interface CancelStatic {
-  new(message?: string): Cancel
+  new (message?: string): Cancel
 }
 
 export interface AxiosBasicCredentials {

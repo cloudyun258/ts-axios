@@ -16,7 +16,17 @@ export default {
     { file: pkg.module, format: 'es', sourcemap: true },
   ],
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-  external: [],
+  external: [
+    '@koa/cors',
+    '@koa/router',
+    'js-base64',
+    'koa',
+    'koa-body',
+    'koa-mount',
+    'koa-static',
+    'koa-view',
+    'qs'
+  ],
   watch: {
     include: 'src/**',
   },

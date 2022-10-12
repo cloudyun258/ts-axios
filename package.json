@@ -1,8 +1,12 @@
 {
   "name": "ts-axios-cloud",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "基于 TypeScript 从零重构 axios",
-  "keywords": [],
+  "keywords": [
+    "ajax",
+    "typescript",
+    "axios"
+  ],
   "main": "dist/axios.umd.js",
   "module": "dist/axios.es5.js",
   "typings": "dist/types/index.d.ts",

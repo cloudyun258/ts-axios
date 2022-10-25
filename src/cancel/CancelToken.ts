@@ -73,7 +73,7 @@ export default CancelToken
         console.log(res)
       })
       // 取消请求（message 参数是可选的）
-      source.cancel('取消请求')
+      source.cancel('取消请求...')
 
     这种方式，只要执行了一次取消请求操作，那么用到了同一个 signal 或 toaken 的未响应请求都同时会被取消，后续请求也不会再发出去（直接取消）
 
@@ -91,6 +91,6 @@ export default CancelToken
     // 取消请求
     cancel()
 
-    这种方式，每次的 cancelToken 的值都是一个新的值，互不影响
+    这种方式，每次的 cancelToken 都是一个新的值，互不影响
 
 */
